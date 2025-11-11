@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Servlet Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .endpoint {
+            background: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #0066cc;
+            margin: 20px 0;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            display: none;
+        }
+        code {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        pre {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Hello Servlet Application</h1>
+        <p>Bienvenido a la aplicación Java Servlet con respuesta JSON.</p>
+        
+        <div class="endpoint">
+            <h3>Endpoint disponible:</h3>
+            <p><strong>GET</strong> <code>/hello</code></p>
+            <p>Responde con un objeto JSON que contiene un mensaje de saludo.</p>
+        </div>
+
+        <h3>Probar el servlet:</h3>
+        <button onclick="testServlet()">Llamar a /hello</button>
+        
+        <div id="response">
+            <h4>Respuesta:</h4>
+            <pre id="responseContent"></pre>
+        </div>
+
+        <h3>Documentación:</h3>
+        <ul>
+            <li>El servlet está mapeado a la ruta <code>/hello</code></li>
+            <li>Responde con Content-Type: <code>application/json</code></li>
+            <li>El formato de respuesta es: <code>{"message": "Hola desde el servlet!"}</code></li>
+        </ul>
+
+        <h3>Tecnologías utilizadas:</h3>
+        <ul>
+            <li>Java Servlet API 4.0.1</li>
+            <li>Gson 2.8.9 (JSON)</li>
+            <li>JUnit 4.13.2 (Testing)</li>
+            <li>Mockito 4.11.0 (Mocking)</li>
+        </ul>
+    </div>
+
+    <script>
+        async function testServlet() {
+            const responseDiv = document.getElementById('response');
+            const responseContent = document.getElementById('responseContent');
+            
+            try {
+                const response = await fetch('hello');
+                const data = await response.json();
+                
+                responseContent.textContent = JSON.stringify(data, null, 2);
+                responseDiv.style.display = 'block';
+            } catch (error) {
+                responseContent.textContent = 'Error: ' + error.message;
+                responseDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
